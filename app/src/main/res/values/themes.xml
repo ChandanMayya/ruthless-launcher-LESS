@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Less" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/less_black</item>
+        <item name="android:colorBackground">@color/less_black</item>
+        <item name="android:textColor">@color/less_white</item>
+        <item name="android:textColorPrimary">@color/less_white</item>
+        <item name="android:textColorSecondary">@color/less_white</item>
+        <item name="android:textColorHint">@color/less_white</item>
+        <item name="android:statusBarColor">@color/less_black</item>
+        <item name="android:navigationBarColor">@color/less_black</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:typeface">monospace</item>
+        <item name="colorPrimary">@color/less_white</item>
+        <item name="colorPrimaryDark">@color/less_black</item>
+        <item name="colorAccent">@color/less_white</item>
+        <item name="android:editTextColor">@color/less_white</item>
+        <item name="editTextColor">@color/less_white</item>
+    </style>
+
+    <style name="Theme.Less.Dialog" parent="Theme.Less">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.55</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/less_black</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+    </style>
+
+    <style name="LessText">
+        <item name="android:textColor">@color/less_white</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:background">@color/less_black</item>
+    </style>
+
+    <style name="LessText.Title" parent="LessText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:letterSpacing">0.08</item>
+    </style>
+
+    <style name="LessText.Body" parent="LessText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
+    <style name="LessText.Clock" parent="LessText">
+        <item name="android:textSize">48sp</item>
+        <item name="android:letterSpacing">0.12</item>
+    </style>
+
+    <style name="LessText.Date" parent="LessText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+    <style name="LessText.Hint" parent="LessText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:alpha">0.7</item>
+    </style>
+
+    <!-- Clickable actions in menus / setup / confirmations (not home/drawer app rows). -->
+    <style name="LessText.Action" parent="LessText.Body">
+        <item name="android:alpha">1.0</item>
+    </style>
+
+    <!-- Thin white rule between home sections. Still black/white only. -->
+    <style name="LessDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/less_white</item>
+        <item name="android:alpha">0.35</item>
+    </style>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LESS</string>
+    <string name="applications">APPLICATIONS</string>
+    <string name="search">SEARCH</string>
+    <string name="search_hint">SEARCH APPLICATION</string>
+    <string name="pinned">PINNED</string>
+    <string name="all_applications">ALL APPLICATIONS</string>
+    <string name="swipe_up">SWIPE UP APPS · DOWN NOTIF / QS</string>
+    <string name="no_application_found">NO APPLICATION FOUND</string>
+    <string name="settings">SETTINGS</string>
+    <string name="home_apps">HOME APPS</string>
+    <string name="pinned_apps">PINNED APPS</string>
+    <string name="add_application">ADD APPLICATION</string>
+    <string name="remove">REMOVE</string>
+    <string name="move_up">MOVE UP</string>
+    <string name="move_down">MOVE DOWN</string>
+    <string name="reset_defaults">RESET DEFAULTS</string>
+    <string name="done">DONE</string>
+    <string name="open">OPEN</string>
+    <string name="pin">PIN</string>
+    <string name="unpin">UNPIN</string>
+    <string name="app_information">APP INFORMATION</string>
+    <string name="remove_from_home">REMOVE FROM HOME</string>
+    <string name="add_to_home">ADD TO HOME</string>
+    <string name="cancel">CANCEL</string>
+    <string name="cannot_launch">CANNOT LAUNCH APPLICATION</string>
+    <string name="about">ABOUT</string>
+    <string name="field_manual">FIELD MANUAL</string>
+    <string name="about_body">LESS\nA boring digital detox launcher.\n\nNo icons. No colors. No engagement.\nOpen FIELD MANUAL from Settings for the full map.</string>
+    <string name="list_style">LIST STYLE</string>
+    <string name="data">DATA</string>
+    <string name="coming_later">AVAILABLE IN A LATER PHASE</string>
+    <string name="accessibility_service_description">LESS uses Accessibility to return you home when a quota is finished, lock on double-tap home, and open notifications or quick settings from swipe-down. Turn the main LESS switch On. Leave the LESS shortcut Off — the floating button is not used. No content is read or sent anywhere.</string>
+    <string name="double_tap_lock_need_accessibility">TURN ACCESSIBILITY ON\n(LEAVE SHORTCUT OFF)</string>
+    <string name="swipe_down_panels_need_accessibility">TURN ACCESSIBILITY ON\n(LEAVE SHORTCUT OFF)</string>
+    <string name="accessibility_setup_hint">Turn LESS On.\nLeave LESS shortcut Off.\nThe floating button is not needed.</string>
+</resources>

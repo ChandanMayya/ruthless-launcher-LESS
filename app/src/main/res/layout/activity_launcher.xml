@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/less_black"
+    android:importantForAccessibility="yes">
+
+    <!-- HOME -->
+    <LinearLayout
+        android:id="@+id/homePanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/less_padding"
+        android:importantForAccessibility="yes">
+
+        <!-- TIME + BOREDOM (side by side) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:minHeight="72dp">
+
+            <TextView
+                android:id="@+id/clockText"
+                style="@style/LessText.Clock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:contentDescription="Current time" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/less_white"
+                android:alpha="0.35"
+                android:importantForAccessibility="no" />
+
+            <TextView
+                android:id="@+id/boredomText"
+                style="@style/LessText.Hint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start|center_vertical"
+                android:maxLines="6"
+                android:contentDescription="Boredom message" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/dateWeekdayText"
+            style="@style/LessText.Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:contentDescription="Weekday" />
+
+        <TextView
+            android:id="@+id/dateFullText"
+            style="@style/LessText.Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:contentDescription="Date" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/batteryFlash"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginEnd="6dp"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no"
+                android:src="@drawable/less_flash"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/batteryText"
+                style="@style/LessText.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="—"
+                android:textColor="@color/less_white"
+                android:contentDescription="Battery" />
+        </LinearLayout>
+
+        <View
+            style="@style/LessDivider"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- USAGE -->
+        <TextView
+            android:id="@+id/temperatureHeader"
+            style="@style/LessText.Hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PHONE TEMPERATURE"
+            android:contentDescription="Phone temperature" />
+
+        <TextView
+            android:id="@+id/screenTimeText"
+            style="@style/LessText.Body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="—"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="Daily screen time" />
+
+        <TextView
+            android:id="@+id/temperatureText"
+            style="@style/LessText.Body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="—"
+            android:contentDescription="Temperature level" />
+
+        <TextView
+            android:id="@+id/pickupsHeader"
+            style="@style/LessText.Hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="PHONE PICKUPS"
+            android:contentDescription="Phone pickups" />
+
+        <TextView
+            android:id="@+id/pickupsText"
+            style="@style/LessText.Body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="—"
+            android:contentDescription="Pickup count" />
+
+        <TextView
+            android:id="@+id/lastUnlockHeader"
+            style="@style/LessText.Hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="LAST UNLOCK"
+            android:contentDescription="Last unlock" />
+
+        <TextView
+            android:id="@+id/lastUnlockText"
+            style="@style/LessText.Body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="—"
+            android:contentDescription="Last unlock details" />
+
+        <View
+            style="@style/LessDivider"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- HOME APPS -->
+        <TextView
+            android:id="@+id/homeAppsHeader"
+            style="@style/LessText.Hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="HOME"
+            android:contentDescription="Home applications" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/homeAppsList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp"
+            android:overScrollMode="never"
+            android:importantForAccessibility="yes" />
+
+        <View
+            style="@style/LessDivider"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/swipeHint"
+            style="@style/LessText.Hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp"
+            android:text="@string/swipe_up"
+            android:contentDescription="@string/swipe_up" />
+    </LinearLayout>
+
+    <!-- DRAWER -->
+    <LinearLayout
+        android:id="@+id/drawerPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/less_padding"
+        android:background="@color/less_black"
+        android:visibility="gone"
+        android:importantForAccessibility="yes">
+
+        <TextView
+            android:id="@+id/drawerTitle"
+            style="@style/LessText.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/applications"
+            android:contentDescription="@string/applications" />
+
+        <TextView
+            android:id="@+id/drawerChidingText"
+            style="@style/LessText.Hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:contentDescription="Drawer chiding" />
+
+        <View
+            style="@style/LessDivider"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/searchInput"
+            style="@style/LessText.Body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="@string/search_hint"
+            android:imeOptions="actionSearch"
+            android:inputType="text|textNoSuggestions"
+            android:maxLines="1"
+            android:textColorHint="#88FFFFFF"
+            android:importantForAutofill="no"
+            android:contentDescription="@string/search" />
+
+        <View
+            style="@style/LessDivider"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/drawerAppsList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:overScrollMode="never" />
+    </LinearLayout>
+</FrameLayout>

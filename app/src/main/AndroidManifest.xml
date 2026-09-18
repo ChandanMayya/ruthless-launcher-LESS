@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Phase 3+: UsageStatsManager requires PACKAGE_USAGE_STATS (special access). -->
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+
+    <!--
+      Android 11+ package visibility: without this, queryIntentActivities() only
+      returns a filtered subset (often looking like "defaults only") when LESS
+      is not yet the default home app, and on some OEMs even after it is.
+      Launchers need broad visibility to list and launch installed apps.
+    -->
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!--
+      Intent-based visibility for MAIN/LAUNCHER activities. Works together with
+      QUERY_ALL_PACKAGES; also covers the Play-preferred queries path.
+    -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".LessApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Less"
+        android:usesCleartextTraffic="false">
+
+        <!--
+          Launcher / home role.
+          MAIN + HOME + DEFAULT is required for the system home chooser.
+        -->
+        <activity
+            android:name=".launcher.LauncherActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:stateNotNeeded="true"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.Less"
+            android:windowSoftInputMode="adjustNothing"
+            android:configChanges="keyboard|keyboardHidden|navigation">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Less"
+            android:parentActivityName=".launcher.LauncherActivity" />
+
+        <activity
+            android:name=".settings.HomeAppsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Less"
+            android:parentActivityName=".settings.SettingsActivity" />
+
+        <activity
+            android:name=".settings.PinnedAppsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Less"
+            android:parentActivityName=".settings.SettingsActivity" />
+
+        <activity
+            android:name=".settings.AppPickerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Less" />
+
+        <activity
+            android:name=".launcher.AppMenuActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Less.Dialog"
+            android:excludeFromRecents="true" />
+
+        <activity
+            android:name=".friction.LaunchGateActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Less.Dialog"
+            android:excludeFromRecents="true" />
+
+        <activity
+            android:name=".usage.ScreenTimeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Less"
+            android:parentActivityName=".launcher.LauncherActivity" />
+
+        <activity
+            android:name=".settings.PolicyListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Less"
+            android:parentActivityName=".settings.SettingsActivity" />
+
+        <activity
+            android:name=".settings.DataActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Less"
+            android:parentActivityName=".settings.SettingsActivity" />
+
+        <activity
+            android:name=".settings.OnboardingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Less"
+            android:launchMode="singleTop"
+            android:excludeFromRecents="true" />
+
+        <activity
+            android:name=".tour.FieldManualActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Less"
+            android:parentActivityName=".settings.SettingsActivity" />
+
+        <service
+            android:name=".session.SessionTimerService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="session usage countdown overlay" />
+        </service>
+
+        <!--
+          Optional quota enforcement. Documented limitation: not a hard OS jail;
+          user can revoke Accessibility; OEMs may differ.
+        -->
+        <service
+            android:name=".accessibility.UsageEnforcementAccessibilityService"
+            android:exported="false"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service" />
+        </service>
+
+        <receiver
+            android:name=".usage.ScreenTimeAlertReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.ruthless.less.action.SCREEN_TIME_ALERT_CHECK" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+</manifest>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="less_padding">24dp</dimen>
+    <dimen name="less_row_padding_compact">6dp</dimen>
+    <dimen name="less_row_padding_normal">12dp</dimen>
+    <dimen name="less_row_padding_spaced">20dp</dimen>
+    <dimen name="less_row_padding_very_spaced">32dp</dimen>
+    <dimen name="less_onboarding_corner">16dp</dimen>
+    <dimen name="less_onboarding_outer_pad">20dp</dimen>
+    <dimen name="less_onboarding_inner_pad">22dp</dimen>
+    <dimen name="less_menu_card_corner">14dp</dimen>
+    <dimen name="less_menu_card_margin">28dp</dimen>
+    <dimen name="less_menu_card_pad">20dp</dimen>
+    <dimen name="less_menu_card_max_height">520dp</dimen>
+</resources>
