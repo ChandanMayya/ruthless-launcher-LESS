@@ -90,6 +90,7 @@ public class LauncherActivity extends LessActivity implements AppRepository.List
         homeList.setLayoutManager(new LinearLayoutManager(this));
         homeList.setAdapter(homeAppsAdapter);
 
+        clock.setOnClickListener(v -> openClockApp());
         clock.setOnLongClickListener(v -> {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
@@ -261,6 +262,25 @@ public class LauncherActivity extends LessActivity implements AppRepository.List
 
     private void launchApp(InstalledApp app) {
         LaunchGateActivity.start(this, app.getPackageName(), app.getDisplayLabel());
+    }
+
+    private void openClockApp() {
+        try {
+            Intent alarms = new Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS);
+            alarms.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(alarms);
+            return;
+        } catch (Exception ignored) {
+            // Fall through.
+        }
+        try {
+            Intent clock = Intent.makeMainSelectorActivity(
+                    Intent.ACTION_MAIN, "android.intent.category.APP_CLOCK");
+            clock.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(clock);
+        } catch (Exception e) {
+            Toast.makeText(this, R.string.cannot_launch, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

@@ -44,7 +44,7 @@ public final class TourCatalog {
                         .body(
                                 "LESS keeps a sparse home: a few intentional apps only.",
                                 "Everything else waits in the drawer. Search finds names — not shiny bait.",
-                                "Swipe up for applications. Long-press the clock for Settings later.")
+                                "Swipe up for applications. Tap the clock for Clock. Long-press the clock for Settings later.")
                         .warning("Until LESS is your default launcher, the old home still appears first.")
                         .primary("OPEN LAUNCHER SETTINGS", TourAction.OPEN_HOME_SETTINGS)
                         .secondary("NEXT", TourAction.NEXT)
@@ -146,7 +146,7 @@ public final class TourCatalog {
                         .lead("Setup is done. The Field Manual is there if you want the full map later.")
                         .body(
                                 "Long-press any app for limits, CONFUSE ME, session timers, and more.",
-                                "Long-press the clock for Settings.")
+                                "Tap the clock for Clock. Long-press the clock for Settings.")
                         .warning("Put the phone down when you can.")
                         .primary("BEGIN", TourAction.FINISH_ONBOARDING)
                         .build()
