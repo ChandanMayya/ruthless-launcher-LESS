@@ -113,6 +113,8 @@ public final class AppDrawerController {
         drawerPanel.setVisibility(View.VISIBLE);
         homePanel.setVisibility(View.GONE);
         searchInput.requestFocus();
+        scrollToTop();
+        drawerList.post(this::scrollToTop);
     }
 
     public void close() {
@@ -120,12 +122,23 @@ public final class AppDrawerController {
         drawerPanel.setVisibility(View.GONE);
         homePanel.setVisibility(View.VISIBLE);
         searchInput.clearFocus();
+        scrollToTop();
     }
 
     public void refresh() {
         adapter.setListStyle(settings.getListStyle());
         String query = searchInput.getText() == null ? "" : searchInput.getText().toString();
         adapter.setItems(appRepository.buildDrawerItems(query));
+    }
+
+    private void scrollToTop() {
+        drawerList.stopScroll();
+        RecyclerView.LayoutManager lm = drawerList.getLayoutManager();
+        if (lm instanceof LinearLayoutManager) {
+            ((LinearLayoutManager) lm).scrollToPositionWithOffset(0, 0);
+        } else {
+            drawerList.scrollToPosition(0);
+        }
     }
 
     private void showDrawerChiding() {
@@ -150,7 +163,12 @@ public final class AppDrawerController {
                 normals.add(app.getPackageName());
             }
         }
-        confuseManager.startSessionAsync(normals, () -> drawerList.post(this::refresh));
+        confuseManager.startSessionAsync(normals, () -> drawerList.post(() -> {
+            refresh();
+            if (open) {
+                scrollToTop();
+            }
+        }));
         refresh();
     }
 }
