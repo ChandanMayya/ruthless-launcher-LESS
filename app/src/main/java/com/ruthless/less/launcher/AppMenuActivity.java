@@ -173,6 +173,13 @@ public class AppMenuActivity extends LessActivity {
             finish();
         });
 
+        if (!packageName.equals(getPackageName())) {
+            addAction(getString(R.string.uninstall), v -> {
+                launcher.uninstall(packageName);
+                finish();
+            });
+        }
+
         LessDivider.add(this, list);
         addAction(getString(R.string.cancel), v -> finish());
     }

@@ -50,4 +50,23 @@ public final class AppLauncher {
             Toast.makeText(context, R.string.cannot_launch, Toast.LENGTH_SHORT).show();
         }
     }
+
+    /** Opens the system uninstall confirmation for this package. */
+    public void uninstall(String packageName) {
+        if (packageName == null || packageName.isEmpty()) {
+            return;
+        }
+        if (packageName.equals(context.getPackageName())) {
+            Toast.makeText(context, R.string.cannot_uninstall_self, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(Intent.ACTION_DELETE);
+        intent.setData(Uri.fromParts("package", packageName, null));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            context.startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(context, R.string.cannot_uninstall, Toast.LENGTH_SHORT).show();
+        }
+    }
 }

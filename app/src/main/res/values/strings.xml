@@ -21,6 +21,9 @@
     <string name="pin">PIN</string>
     <string name="unpin">UNPIN</string>
     <string name="app_information">APP INFORMATION</string>
+    <string name="uninstall">UNINSTALL</string>
+    <string name="cannot_uninstall">CANNOT UNINSTALL</string>
+    <string name="cannot_uninstall_self">CANNOT UNINSTALL LESS FROM HERE</string>
     <string name="remove_from_home">REMOVE FROM HOME</string>
     <string name="add_to_home">ADD TO HOME</string>
     <string name="cancel">CANCEL</string>
