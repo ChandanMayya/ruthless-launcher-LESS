@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy — LESS</title>
+  <meta name="description" content="Privacy Policy for LESS (Ruthless Launcher), a local-only Android digital detox launcher." />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #000000;
+      --fg: #ffffff;
+      --muted: #b3b3b3;
+      --rule: rgba(255, 255, 255, 0.28);
+      --max: 42rem;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      line-height: 1.55;
+      font-size: 15px;
+    }
+
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    h1 {
+      font-size: 1.35rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 0 0 0.5rem;
+      font-weight: 600;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 2rem 0 0.75rem;
+      font-weight: 600;
+    }
+
+    p, li {
+      color: var(--fg);
+      margin: 0 0 0.85rem;
+    }
+
+    .meta, .muted {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid var(--rule);
+      margin: 1.25rem 0;
+    }
+
+    ul {
+      margin: 0 0 1rem;
+      padding-left: 1.2rem;
+    }
+
+    li { margin-bottom: 0.45rem; }
+
+    a {
+      color: var(--fg);
+      text-underline-offset: 0.15em;
+    }
+
+    strong { font-weight: 600; }
+
+    .box {
+      border: 1px solid var(--rule);
+      padding: 1rem 1.1rem;
+      margin: 1rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Privacy Policy</h1>
+    <p class="meta">LESS (display name) · Ruthless Launcher · Android package <code>com.ruthless.less</code></p>
+    <p class="meta">Effective date: 22 September 2026 · Last updated: 22 September 2026</p>
+
+    <hr />
+
+    <div class="box">
+      <p><strong>Summary:</strong> LESS does not collect personal information, does not use ads or analytics SDKs, and does not send your data to our servers. Settings, usage summaries, and policies stay on your device unless you choose to back up your device through Android or a third party.</p>
+    </div>
+
+    <h2>1. Who we are</h2>
+    <p>
+      This Privacy Policy describes how the Android application <strong>LESS</strong>
+      (also referred to as Ruthless Launcher; package name <strong>com.ruthless.less</strong>)
+      handles information.
+    </p>
+    <p>
+      LESS is a deliberately minimal, text-only home-screen launcher designed to reduce
+      phone engagement. It is intended for people who want fewer distractions—not for
+      tracking users across apps or the internet.
+    </p>
+
+    <h2>2. No internet-based data collection</h2>
+    <p>LESS is designed to operate locally on your device. In particular:</p>
+    <ul>
+      <li>We do <strong>not</strong> operate accounts, cloud sync, or remote login for LESS.</li>
+      <li>We do <strong>not</strong> include advertising networks, analytics SDKs, crash-reporting SDKs, or social trackers.</li>
+      <li>We do <strong>not</strong> upload app lists, screen-time totals, messages, contacts, photos, location, or policy settings to our servers.</li>
+      <li>LESS does not require an internet connection to function as a launcher.</li>
+    </ul>
+    <p class="muted">
+      Note: Your device manufacturer, Google Play, and Android itself may process limited
+      technical information (for example install metadata) under their own policies. That
+      processing is outside LESS and is governed by those providers’ privacy policies.
+    </p>
+
+    <h2>3. Information processed on your device</h2>
+    <p>
+      To work as a launcher and digital-detox tool, LESS may process the following
+      information <strong>only on your device</strong>:
+    </p>
+    <ul>
+      <li><strong>Installed applications</strong> — names and package identifiers needed to list, search, pin, launch, or apply per-app limits.</li>
+      <li><strong>Launcher preferences</strong> — home apps, pins, text size, font, list style, onboarding progress, and similar settings.</li>
+      <li><strong>Per-app policies you configure</strong> — daily limits, launch confirmation, launch delay, session timers, CONFUSE ME, and screen-time monitoring on/off.</li>
+      <li><strong>Usage summaries (optional)</strong> — if you grant Usage Access, LESS may read Android usage statistics to show screen time, approximate pickups, and related “receipts,” and to enforce limits you set.</li>
+      <li><strong>Local history</strong> — lightweight on-device snapshots (for example daily usage minutes or last-opened app labels) used for features inside LESS.</li>
+      <li><strong>Session timer state</strong> — temporary countdown information when you enable session timers.</li>
+    </ul>
+    <p>
+      LESS does not need access to your contacts, SMS, call logs, microphone, camera,
+      precise location, or photos to provide its core features.
+    </p>
+
+    <h2>4. Permissions and why they are requested</h2>
+    <p>Depending on which features you enable, Android may ask for:</p>
+    <ul>
+      <li><strong>Default / Home app role</strong> — so LESS can act as your launcher.</li>
+      <li><strong>Usage Access (PACKAGE_USAGE_STATS)</strong> — optional; used for screen-time totals, quotas, and related local features.</li>
+      <li><strong>Accessibility Service</strong> — optional; used for local enforcement helpers such as returning home when a quota ends, double-tap lock on home, and opening notification / quick-settings panels from gestures. LESS does not use Accessibility to read message content or send data off-device.</li>
+      <li><strong>Display over other apps</strong> — optional; used for session-timer overlays.</li>
+      <li><strong>Notifications</strong> — optional; used for local screen-time / session alerts.</li>
+      <li><strong>Query installed apps / package visibility</strong> — required for a launcher to list and launch applications.</li>
+      <li><strong>Foreground service</strong> — used for session-timer countdowns while a timed app is in use.</li>
+      <li><strong>Boot completed</strong> — used to restore local alert scheduling after reboot when enabled.</li>
+    </ul>
+    <p>
+      You can revoke optional permissions in Android Settings. Some features will stop
+      working until permission is granted again.
+    </p>
+
+    <h2>5. Children</h2>
+    <p>
+      LESS is not directed at children under 13 (or the equivalent minimum age in your
+      jurisdiction). We do not knowingly collect personal information from children.
+      If you believe a child has provided personal information through a channel related
+      to LESS, contact us and we will take appropriate steps.
+    </p>
+
+    <h2>6. Data retention and deletion</h2>
+    <p>
+      Because data is stored on your device, retention is controlled by you. You can:
+    </p>
+    <ul>
+      <li>Clear usage history and policies from inside LESS (<strong>Settings → Data</strong>), where available.</li>
+      <li>Clear app storage / cache in Android system settings.</li>
+      <li>Uninstall LESS, which removes the app’s local storage on most devices.</li>
+    </ul>
+    <p class="muted">
+      Android device backups (if enabled by you) may include app data according to your
+      backup provider’s rules.
+    </p>
+
+    <h2>7. Sharing of information</h2>
+    <p>
+      We do not sell personal information. LESS does not share on-device launcher data
+      with advertisers or data brokers. We only disclose information if required by law
+      (for example a valid legal request about our distribution of the app), which would
+      not include access to data that never left your device.
+    </p>
+
+    <h2>8. Security</h2>
+    <p>
+      On-device information is protected by Android’s app sandbox and your device lock.
+      No method of storage is perfectly secure; keep your device updated and use a
+      screen lock.
+    </p>
+
+    <h2>9. International users</h2>
+    <p>
+      LESS processes information on the device where it is installed. We do not transfer
+      LESS feature data to our servers because we do not operate such collection.
+    </p>
+
+    <h2>10. Changes to this policy</h2>
+    <p>
+      We may update this Privacy Policy when the app’s features or legal requirements
+      change. The “Last updated” date at the top will change when we do. Continued use
+      of LESS after an update means you accept the revised policy.
+    </p>
+
+    <h2>11. Contact</h2>
+    <p>
+      Questions about this Privacy Policy or LESS privacy practices:
+    </p>
+    <ul>
+      <li>
+        GitHub:
+        <a href="https://github.com/ChandanMayya/ruthless-launcher-LESS">
+          github.com/ChandanMayya/ruthless-launcher-LESS
+        </a>
+      </li>
+      <li>
+        Email:
+        <!-- Replace with your public support email before publishing -->
+        <a href="mailto:chandanmuppinangady@gmail.com">chandanmuppinangady@gmail.com</a>
+      </li>
+    </ul>
+    
+
+    <hr />
+    <p class="muted">© 2026 LESS / Ruthless Launcher. All rights reserved.</p>
+  </main>
+</body>
+</html>

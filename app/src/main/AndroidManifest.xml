@@ -22,6 +22,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Required so UninstallerActivity accepts DELETE from this app (Android 13+ / Samsung). -->
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
 
     <!--
       Intent-based visibility for MAIN/LAUNCHER activities. Works together with
@@ -96,7 +98,7 @@
         <activity
             android:name=".friction.LaunchGateActivity"
             android:exported="false"
-            android:theme="@style/Theme.Less.Dialog"
+            android:theme="@style/Theme.Less.Gate"
             android:excludeFromRecents="true" />
 
         <activity
@@ -161,6 +163,15 @@
             <intent-filter>
                 <action android:name="com.ruthless.less.action.SCREEN_TIME_ALERT_CHECK" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Debug / reliability: allow adb to trigger uninstall path used by the menu. -->
+        <receiver
+            android:name=".applications.UninstallRequestReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.ruthless.less.action.REQUEST_UNINSTALL" />
             </intent-filter>
         </receiver>
 

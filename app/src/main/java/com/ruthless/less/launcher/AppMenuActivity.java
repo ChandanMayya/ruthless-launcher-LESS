@@ -175,7 +175,9 @@ public class AppMenuActivity extends LessActivity {
 
         if (!packageName.equals(getPackageName())) {
             addAction(getString(R.string.uninstall), v -> {
-                launcher.uninstall(packageName);
+                // Queue for LauncherActivity — starting here (or after finish from
+                // application context) is blocked by background-activity limits.
+                new AppLauncher(this).queueUninstallFromMenu(packageName);
                 finish();
             });
         }

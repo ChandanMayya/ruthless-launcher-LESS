@@ -35,9 +35,12 @@ public class LaunchGateActivity extends LessActivity {
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final LaunchDelayManager delayManager = new LaunchDelayManager();
     private LinearLayout root;
+    private View scrim;
+    private View card;
     private String packageName;
     private String label;
     private boolean cancelled;
+    private boolean gateUiVisible;
     private long sessionDurationMs;
 
     public static void start(Activity from, String packageName, String label) {
@@ -45,6 +48,7 @@ public class LaunchGateActivity extends LessActivity {
         intent.putExtra(EXTRA_PACKAGE, packageName);
         intent.putExtra(EXTRA_LABEL, label);
         from.startActivity(intent);
+        from.overridePendingTransition(0, 0);
     }
 
     @Override
@@ -52,12 +56,17 @@ public class LaunchGateActivity extends LessActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_menu);
         root = findViewById(R.id.menuList);
-        View scrim = findViewById(R.id.menuScrim);
-        View card = findViewById(R.id.menuCard);
+        scrim = findViewById(R.id.menuScrim);
+        card = findViewById(R.id.menuCard);
+        // Stay fully invisible until a gate screen needs content — avoids empty card flash.
+        hideGateUi();
         if (scrim != null) {
             scrim.setOnClickListener(v -> {
+                if (!gateUiVisible) {
+                    return;
+                }
                 cancelled = true;
-                finish();
+                finishSilent();
             });
         }
         if (card != null) {
@@ -69,7 +78,7 @@ public class LaunchGateActivity extends LessActivity {
         packageName = getIntent().getStringExtra(EXTRA_PACKAGE);
         label = getIntent().getStringExtra(EXTRA_LABEL);
         if (packageName == null) {
-            finish();
+            finishSilent();
             return;
         }
         if (label == null) {
@@ -83,6 +92,36 @@ public class LaunchGateActivity extends LessActivity {
 
         policies.getOrCreate(packageName, entity -> runOnUiThread(() ->
                 beginPipeline(entity, usage, quotas)));
+    }
+
+    private void hideGateUi() {
+        gateUiVisible = false;
+        if (card != null) {
+            card.setVisibility(View.GONE);
+        }
+        if (scrim != null) {
+            scrim.setBackgroundColor(android.graphics.Color.TRANSPARENT);
+            scrim.setClickable(false);
+        }
+    }
+
+    private void revealGateUi() {
+        if (gateUiVisible) {
+            return;
+        }
+        gateUiVisible = true;
+        if (scrim != null) {
+            scrim.setBackgroundColor(0x99000000);
+            scrim.setClickable(true);
+        }
+        if (card != null) {
+            card.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void finishSilent() {
+        finish();
+        overridePendingTransition(0, 0);
     }
 
     private void beginPipeline(AppPolicyEntity policy, UsageStatsReader usage, QuotaManager quotas) {
@@ -108,6 +147,7 @@ public class LaunchGateActivity extends LessActivity {
     }
 
     private void showQuotaFinished(QuotaManager.QuotaState state, QuotaManager quotas) {
+        revealGateUi();
         root.removeAllViews();
         addTitle(label);
         LessDivider.add(this, root);
@@ -140,6 +180,7 @@ public class LaunchGateActivity extends LessActivity {
     }
 
     private void showConfirmation(AppPolicyEntity policy) {
+        revealGateUi();
         root.removeAllViews();
         addTitle(label);
         LessDivider.add(this, root);
@@ -179,6 +220,7 @@ public class LaunchGateActivity extends LessActivity {
     }
 
     private void showSessionDurationPicker(AppPolicyEntity policy) {
+        revealGateUi();
         root.removeAllViews();
         addTitle(label);
         LessDivider.add(this, root);
@@ -235,6 +277,7 @@ public class LaunchGateActivity extends LessActivity {
             doLaunch();
             return;
         }
+        revealGateUi();
         root.removeAllViews();
         addTitle(label);
         LessDivider.add(this, root);
@@ -260,7 +303,7 @@ public class LaunchGateActivity extends LessActivity {
         addAction(getString(R.string.cancel), v -> {
             cancelled = true;
             handler.removeCallbacksAndMessages(null);
-            finish();
+            finishSilent();
         });
         handler.post(tick);
     }
@@ -276,10 +319,11 @@ public class LaunchGateActivity extends LessActivity {
             SessionTimerService.start(this, packageName, label, sessionDurationMs);
         }
         new AppLauncher(this).launch(packageName);
-        finish();
+        finishSilent();
     }
 
     private void showBrief(String message) {
+        revealGateUi();
         root.removeAllViews();
         addTitle(message);
     }

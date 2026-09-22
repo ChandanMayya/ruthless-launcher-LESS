@@ -19,8 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ruthless.less.LessApplication;
 import com.ruthless.less.R;
 import com.ruthless.less.accessibility.UsageEnforcementAccessibilityService;
+import com.ruthless.less.applications.AppLauncher;
 import com.ruthless.less.applications.AppRepository;
 import com.ruthless.less.applications.InstalledApp;
+import com.ruthless.less.applications.PendingUninstall;
 import com.ruthless.less.friction.LaunchGateActivity;
 import com.ruthless.less.settings.OnboardingActivity;
 import com.ruthless.less.settings.SettingsActivity;
@@ -34,6 +36,8 @@ import com.ruthless.less.usage.UsageStatsReader;
  * HOME / DEFAULT launcher activity. Text-only black/white UI.
  */
 public class LauncherActivity extends LessActivity implements AppRepository.Listener {
+
+    public static final String EXTRA_UNINSTALL_PACKAGE = "uninstall_package";
 
     private AppRepository appRepository;
     private SettingsRepository settings;
@@ -258,6 +262,7 @@ public class LauncherActivity extends LessActivity implements AppRepository.List
         if (drawerController != null && drawerController.isOpen()) {
             drawerController.close();
         }
+        queueUninstallFromIntent(intent);
     }
 
     private void launchApp(InstalledApp app) {
@@ -303,6 +308,29 @@ public class LauncherActivity extends LessActivity implements AppRepository.List
         if (drawerController.isOpen()) {
             drawerController.refresh();
         }
+        queueUninstallFromIntent(getIntent());
+        maybeStartPendingUninstall();
+    }
+
+    private void queueUninstallFromIntent(Intent intent) {
+        if (intent == null) {
+            return;
+        }
+        String pkg = intent.getStringExtra(EXTRA_UNINSTALL_PACKAGE);
+        if (pkg != null && !pkg.isEmpty()) {
+            PendingUninstall.set(pkg);
+            intent.removeExtra(EXTRA_UNINSTALL_PACKAGE);
+        }
+    }
+
+    private void maybeStartPendingUninstall() {
+        String pkg = PendingUninstall.take();
+        if (pkg == null || pkg.isEmpty()) {
+            return;
+        }
+        // Post so this resume finishes first; then start as a true foreground activity.
+        getWindow().getDecorView().post(() ->
+                AppLauncher.startUninstallFromForeground(LauncherActivity.this, pkg));
     }
 
     @Override
